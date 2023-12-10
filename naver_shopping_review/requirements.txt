@@ -1,0 +1,7 @@
+pip install selenium==4.2.0
+pip install numpy==1.23.0
+pip install pandas==2.0.3
+pip install konlpy==0.6.0
+pip install matplotlib==3.6.0
+pip install seaborn==0.12.1
+pip install wordcloud==1.9.2
