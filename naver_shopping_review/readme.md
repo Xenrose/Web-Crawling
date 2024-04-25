@@ -1,6 +1,9 @@
 [네이버 쇼핑 리뷰 크롤러 제작자 velog](https://velog.io/@xenrose/naverShppingReviewCrawling)
 
 ___
+주요 스킬
+Selenium, bs4, Threading 병렬처리, konply 형태소 분석, wordCloud
+___
 
 # 네이버 쇼핑 리뷰 크롤러
 * 목표가 될 url에 접속하여 해당 쇼핑몰의 리뷰를 수집하는 크롤러.
