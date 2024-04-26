@@ -1,7 +1,7 @@
 [네이버 쇼핑 리뷰 크롤러 제작자 velog](https://velog.io/@xenrose/naverShppingReviewCrawling)
 
 ___
-주요 스킬
+* 주요 스킬  
 Selenium, bs4, Threading 병렬처리, konply 형태소 분석, wordCloud
 ___
 
