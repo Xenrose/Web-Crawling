@@ -1,0 +1,7 @@
+{   
+    "DB_PATH": "./DB/DB.csv",
+    "email" : "",
+    "pw" : "",
+    "to_email": [""],
+    "schedule": "07:50"
+}

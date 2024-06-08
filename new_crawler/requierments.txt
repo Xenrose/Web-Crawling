@@ -1,0 +1,5 @@
+pandas==1.5.3
+chromedriver-autoinstaller
+chromedrivermanager
+bs4==0.0.1
+selenium==4.2.0
