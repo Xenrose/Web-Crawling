@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import datetime, timedelta
 from pathlib import Path
-
+import sqlite3
 
 dot_tag = '&#8226;'
 gap_tag = '&nbsp;'
@@ -37,8 +37,8 @@ def unit_content(content:dict) -> str:
     if type(content) == dict:
         return \
         f"""
-            <h2><p>{dot_tag}  <a href="{content['url']}">{content['title']}</a></p></h2>
-                {gap_tag*4}>>{gap_tag}{content['desc']}
+            <h2><p>{dot_tag}  <a href="{content['URL']}">{content['TITLE']}</a></p></h2>
+                {gap_tag*4}>>{gap_tag}{content['DESC']}
                 <br>
                 <br>
         """
@@ -57,19 +57,31 @@ def df_to_list(df:pd.DataFrame) -> list:
 
 
 def export(DB_PATH:Path) -> str:
-    DB = pd.read_csv(DB_PATH, encoding='utf-8-sig')    
-    final_contents = ""
+    DB = sqlite3.connect(DB_PATH)
+    cursor = DB.cursor()
 
-    summury_df = DB[(DB['date'].astype(str) == scarp_day) & (DB['importance'] > 0)]
+    final_contents = ""
+    summury_df = pd.DataFrame(columns="MEDIA TITLE DATE DESC URL PAGE_DESC PAGE_IMPORTANCE".split())
+
+    cursor.execute(f'''
+                    SELECT * FROM NEWS
+                    WHERE DATE = {scarp_day} AND PAGE_IMPORTANCE > 0
+                    ORDER BY MEDIA ASC
+                    ''')
+    
+    for idx, data in enumerate(cursor.fetchall()):
+        summury_df.loc[idx] = data
         
+    DB.close()
     if len(summury_df)==0:
         return "금일 주요내용은 없습니다."
     
-    media_list = list(set(summury_df['media'].tolist()))
+
+    media_list = list(set(summury_df['MEDIA'].tolist()))
 
     for media in sorted(media_list):
         final_contents += create_contents(news_media=media,
-                                          df=summury_df[summury_df['media']==media])
+                                          df=summury_df[summury_df['MEDIA']==media])
 
     print(f"[{datetime.now().strftime('%Y-%m-%d / %H:%M:%S')}] contents summury 완료")
     return final_contents

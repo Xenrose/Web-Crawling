@@ -3,3 +3,4 @@ chromedriver-autoinstaller
 chromedrivermanager
 bs4==0.0.1
 selenium==4.2.0
+schedule==1.2.2
